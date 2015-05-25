@@ -1,0 +1,65 @@
+.carousel{
+  margin-top: 25%;
+  margin-left: 12%;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  background: black;  
+  text-align: center;
+  width: 75%;
+  height: 33%;
+}
+.slider_wrapper{
+  overflow: hidden;
+  position:relative;
+  height:100%;
+  top:auto;
+}
+#image_slider{
+  position: relative;
+  height: 100%;
+  list-style: none;
+  overflow: hidden;
+  float: left;
+  /*Chrom default padding for ul is 40px */
+  padding:0px;
+  margin:0px;
+}
+#image_slider li{
+  position: relative;
+  float: left;
+}
+
+#pager{
+  /* firefox has different center method. this doesn't work for fire fox */
+  /* not in the center*/
+  padding:0px;
+  position:relative;
+  height:50px;
+  margin:auto;
+  margin-top:10px;
+}
+#pager li{
+  padding: 0px;
+  margin:5px;
+  width:20px;
+  height:20px;
+  border:1px solid white;
+  color:white;
+  list-style: none;
+  opacity: 0.6;
+  float:left;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#pager li:hover{
+  opacity:0.9;
+}
+
+#pager{
+  display: none;
+}
+
+#asteroids-game-button, #pacman-game-button, #pong-game-button, #snake-game-button, #space-invaders-game-button, #arkanoid-game-button {
+   height: 200px;
+}​

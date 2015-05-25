@@ -1,0 +1,108 @@
+@font-face {
+  font-family: ArcadeClassic;
+  src: url('../fonts/ArcadeClassic.ttf');
+}
+
+.ui-loader {
+  display: none;
+}
+
+.app-content {
+  background-color: #000;
+}
+
+.game {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.trackpad {
+  border: 1px solid #303030;
+  background-color: #101010;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+.scoreTitle {
+  background-color: #000000;
+  font-style: courier;
+  text-align: left;
+  color: #FFFFFF;
+  background-width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 10px;
+  padding-bottom: 4px;
+  margin-top: -10px;
+}
+
+/* arcade homescreen */
+.aStartButton {
+  width: 70%;
+  margin: auto;
+  height: 7%;
+  background-color: #202020;
+  background-size: 100%;
+  border-radius: 600px;
+  border: 6px solid #F0B73E;
+  color: #F0B73E;
+  padding-top: 8px;
+  text-align: center;
+  font-family: ArcadeClassic;
+  font-size: 30px;
+  margin-top: 50%;
+}
+
+.arcade-button {
+  border: 0;
+  background: #F0B73E;
+  border-radius: 25px;
+  box-shadow: 0 5px 0 #b48013;
+  color: #fff;
+  cursor: pointer;
+  margin: 0;
+  outline: 0;
+  padding: 4px 20px 8px 20px;
+  transition: all .1s linear;
+  width: 20px;
+  font-family: ArcadeClassic;
+  font-size: 30px;
+  text-align: center;
+}
+
+.left {
+  float: left;
+  margin-top: 8%;
+  margin-left: 10%;
+}
+
+.right {
+  float: right;
+  margin-top: 8%;
+  margin-right: 10%;
+}
+
+.arcade-button:active {
+  box-shadow: 0 2px 0 #b48013;
+  transform: translateY(3px);
+}
+
+.arcade {
+  background-image: url("../images/arcadeBG.png");
+  background-size: cover;
+  height: 100%;
+}
+
+.aTitle {
+  font-family: ArcadeClassic;
+  font-size: 28px;
+  color: #F0B73E;
+  text-align: center;
+}
+
+.carousel img {
+
+}

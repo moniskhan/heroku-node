@@ -1,0 +1,16 @@
+{
+    "name": "kp-arcade",
+    "version": "0.0.1",
+    "dependencies": {
+        "node-simple-router": "0.9.3-1",
+        "kik-lib" : "1.0.0",
+        "request":"2.47.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lunaleaps/kp-arcade.git"
+    },
+    "scripts": {
+        "start": "node app.js"
+    }
+}
