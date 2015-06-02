@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KP Arcade</title>
-    <!-- https://classic-arcade.herokuapp.com/ -->
+    <title>Classic Arcade</title>
+    <!-- https://kp-arcade.herokuapp.com/
+    https://classic-arcade.herokuapp.com/ -->
     <meta name="viewport" content="width=device-width,
                                    initial-scale=1.0,
                                    maximum-scale=1.0,
                                    user-scalable=no,
                                    minimal-ui">
-    <meta name="kik-https" content="kp-arcade.herokuapp.com">
     <link rel="stylesheet" href="//cdn.kik.com/app/2.0.1/app.min.css">
     <link rel="stylesheet" href="css/indexStyle.css"/>
-    <link rel="stylesheet" href="css/asteroids.css"/>
     <link rel="stylesheet" href="css/spaceInvaders.css"/>
     <link rel="stylesheet" href="css/screen.css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -29,10 +28,6 @@
         <div class="carousel">
           <div class="slider_wrapper">
             <ul id="image_slider">
-              <li><img id="pacman-game-button" class="app-button pacman" src="./images/pacmanImage.png"></li>
-
-              <li><img id="asteroids-game-button" class="app-button asteroids" src="./images/asteroidImage.png"></li>
-
               <li><img id="pong-game-button" class="app-button pong" src="./images/pongImage.png"></li>
 
               <li><img id="snake-game-button" class="app-button snake" src="./images/snakeImage.png"></li>
@@ -51,35 +46,6 @@
       </div>
     </div>
 
-    <!--pacman-->
-    <div class="app-page" data-page="pacman">
-      <div class="app-topbar">
-        <div class="app-button left" data-back>Back</div>
-        <div class="app-title">Pacman</div>
-      </div>
-      <div class="app-content pacman">
-        <canvas class="game"></canvas>
-        <div class="scoreTitle">
-        Score:
-          <span class = "scoreText"></span>
-        </div>
-        <div class="joystick">
-          <div class="trackpad"></div>
-        </div>
-      </div>
-    </div>
-
-    <!--asteroids-->
-    <div class="app-page" data-page="asteroids">
-      <div class="app-topbar">
-        <div class="app-button left" data-back data-autotitle></div>
-        <div class="app-title">Asteroids</div>
-      </div>
-      <div class="app-content">
-        <div id="si-main-div"></div>
-      </div>
-    </div>
-
     <!--pong-->
     <div class="app-page" data-page="pong">
       <div class="app-topbar">
@@ -88,6 +54,10 @@
       </div>
       <div class="app-content">
         <canvas class="canvas"></canvas>
+        <button class="control" type="button" id="pong-left">&#9664;</button>
+        <button class="control" type="button" id="pong-up" disabled>&#9650;</button>
+        <button class="control" type="button" id="pong-right">&#9654;</button>
+        <button class="control" type="button" id="pong-down" disabled>&#9660;</button>
       </div>
     </div>
 
@@ -99,6 +69,10 @@
       </div>
       <div class="app-content">
         <canvas class="canvas"></canvas>
+        <button class="control" type="button" id="snake-left">&#9664;</button>
+        <button class="control" type="button" id="snake-up">&#9650;</button>
+        <button class="control" type="button" id="snake-right">&#9654;</button>
+        <button class="control" type="button" id="snake-down">&#9660;</button>
       </div>
     </div>
 
@@ -111,6 +85,11 @@
       <div class="app-content">
         <div id="starfield"></div>
         <canvas class="canvas"></canvas>
+        <button class="control" type="button" id="space-invaders-left">&#9664;</button>
+        <button class="control" type="button" id="space-invaders-up" disabled>&#9650;</button>
+        <button class="control" type="button" id="space-invaders-right">&#9654;</button>
+        <button class="control" type="button" id="space-invaders-down" disabled>&#9660;</button>
+        <button class="control" type="button" id="space-invaders-fire">&#128293;</button>
       </div>
     </div>
 
@@ -122,27 +101,25 @@
       </div>
       <div class="app-content">
         <canvas class="canvas"></canvas>
+        <button class="control" type="button" id="arkanoid-left">&#9664;</button>
+        <button class="control" type="button" id="arkanoid-up" disabled>&#9650;</button>
+        <button class="control" type="button" id="arkanoid-right">&#9654;</button>
+        <button class="control" type="button" id="arkanoid-down" disabled>&#9660;</button>
       </div>
     </div>
 
     <script src="js/zepto.min.js"></script>
-    <script src='js/joystick.js'></script>
-    <script src="//cdn.kik.com/kik/1.0.9/kik.js"></script>
+    
     <script src="//cdn.kik.com/app/2.0.1/app.min.js"></script>
     <!--<script src="//points.kik.com/points.js"></script>-->
-    <script src='js/pacman.js'></script>
-    <script src='js/asteroids.js'></script>
     <script src='js/pong.js'></script>
     <script src='js/arkanoid.js'></script>
     <script src='js/space_invaders.js'></script>
     <script src='js/snake.js'></script>
     <script src='js/screen.js'></script>
     <script>
-
       App.controller('home', function (page) {
         var $page = $(page),
-            pacman= $page.find('.app-button.pacman'),
-            asteroids= $page.find('.app-button.asteroids');
             pong= $page.find('.app-button.pong');
             snake= $page.find('.app-button.snake');
             spaceInvaders= $page.find('.app-button.spaceInvaders');

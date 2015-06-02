@@ -2,17 +2,15 @@ App.controller('snake', function($page) {
         //Canvas
         var canvas = $page.querySelector(".canvas");
         var ctx = canvas.getContext("2d");
-        //var w = $("#canvas").width();
-        //var h = $("#canvas").height();
 
         var titlebar_height = 44;
 
         // Set the canvas's height and width
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 10*titlebar_height/9;
+        canvas.height = 3*window.innerHeight/4 - 10*titlebar_height/9;
 
         var w = canvas.width; // Window's width
-        var h = canvas.height/2; // Window's height
+        var h = canvas.height; // Window's height
         
         //save the cell width in a variable for easy control
         var cw = 10;
@@ -22,33 +20,39 @@ App.controller('snake', function($page) {
         var over = 0;
         var restartBtn = {};
 
-        var controller = new Image();
-        controller.src = "../images/controller.png";
-        var cx = 0; //W/2 - controller.width/2;
-        var cy = h;
+        var up = $page.querySelector("#snake-up");
+        up.addEventListener('click', function() {
+            d = "up";
+        });
+        var down = $page.querySelector("#snake-down");
+        down.addEventListener('click', function() {
+            d = "down";
+        });
+        var left = $page.querySelector("#snake-left");
+        left.addEventListener('click', function() {
+            d = "left";
+        });
+        var right = $page.querySelector("#snake-right");
+        right.addEventListener('click', function() {
+            d = "right";
+        });
 
-        var up_arrow = new Image();
-        up_arrow.src = "../images/up_green.png";
-        var ux = w/2 - up_arrow.width/2;
-        var uy = 10*(h/9);
-        var down_arrow = new Image();
-        down_arrow.src = "../images/down_green.png";
-        var dx = w/2 - down_arrow.width/2;
-        var dy = 9*(h/6);
-        var left_arrow = new Image();
-        left_arrow.src = "../images/left_green.png";
-        var lx = w/4 - left_arrow.width/2;
-        var ly = 9*(h/7);
-        var right_arrow = new Image();
-        right_arrow.src = "../images/right_green.png";
-        var rx = 3*w/4 - right_arrow.width/2;
-        var ry = 9*(h/7);
+        window.onkeydown = function(e) {
+            var key = e.keyCode ? e.keyCode : e.which;
+            
+            if (key == 37) {
+                d = "left";
+            }else if (key == 39) {
+                d = "right";
+            }else if (key == 38) {
+                d = "up";
+            }else if (key == 40) {
+                d = "down";
+            }
+        }
 
-        
         //create the snake
         var snake_array; //an array of cells to make up the snake
-        canvas.addEventListener("touchstart", touchHandler, true);
-        canvas.addEventListener("touchmove", moveHandler, true);
 
         $(canvas).on('vmousedown', function(e){
             // Variables for storing mouse position on click
@@ -71,66 +75,6 @@ App.controller('snake', function($page) {
                 }
             }
         });
-
-        function touchHandler(event) {
-            if (event.targetTouches.length >= 1) { //one finger touche
-                var touch = event.targetTouches[event.targetTouches.length -1];
-
-                if (event.type == "touchstart" && over != 1) {
-                    
-                    if (d == "left" || d == "right"){
-                        if(event.type == "touchstart" && touch.pageX > dx && touch.pageX < (dx + down_arrow.width) && touch.pageY > (dy + titlebar_height) && touch.pageY < (dy + titlebar_height + down_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " down_arrow " + down_arrow.x + ", " + down_arrow.y + ", " + down_arrow.r + " bar height " + titlebar_height);
-                            d = "down";
-                        }
-                        else if(event.type == "touchstart" && touch.pageX > ux && touch.pageX < (ux + up_arrow.width) && touch.pageY > (uy + titlebar_height) && touch.pageY < (uy + titlebar_height + up_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " up_arrow " + up_arrow.x + ", " + up_arrow.y + ", " + up_arrow.r + " bar height " + titlebar_height);
-                            d = "up";
-                        }
-                    } 
-                    else if(d == "up" || d == "down"){
-                        if (event.type == "touchstart" && touch.pageX > lx && touch.pageX < (lx + left_arrow.width) && touch.pageY > (ly + titlebar_height) && touch.pageY < (ly + titlebar_height + left_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " left_arrow " + left_arrow.x + ", " + left_arrow.y + ", " + left_arrow.r + " bar height " + titlebar_height);
-                            d = "left";
-                        }
-                        else if (event.type == "touchstart" && touch.pageX > rx && touch.pageX < (rx + right_arrow.width) && touch.pageY > (ry + titlebar_height) && touch.pageY < (ry + titlebar_height + right_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " right_arrow " + right_arrow.x + ", " + right_arrow.y + ", " + right_arrow.r + " bar height " + titlebar_height);
-                            d = "right";
-                        }
-                    }
-                }
-            }
-        }
-
-        function moveHandler(event) {
-            if (event.targetTouches.length >= 1) { //one finger touche
-                var touch = event.targetTouches[event.targetTouches.length -1];
-
-                if (event.type == "touchmove" && over != 1) {
-                    
-                    if (d == "left" || d == "right"){
-                        if(event.type == "touchstart" && touch.pageX > dx && touch.pageX < (dx + down_arrow.width) && touch.pageY > (dy + titlebar_height) && touch.pageY < (dy + titlebar_height + down_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " down_arrow " + down_arrow.x + ", " + down_arrow.y + ", " + down_arrow.r + " bar height " + titlebar_height);
-                            d = "down";
-                        }
-                        else if(event.type == "touchstart" && touch.pageX > ux && touch.pageX < (ux + up_arrow.width) && touch.pageY > (uy + titlebar_height) && touch.pageY < (uy + titlebar_height + up_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " up_arrow " + up_arrow.x + ", " + up_arrow.y + ", " + up_arrow.r + " bar height " + titlebar_height);
-                            d = "up";
-                        }
-                    } 
-                    else if(d == "up" || d == "down"){
-                        if (event.type == "touchstart" && touch.pageX > lx && touch.pageX < (lx + left_arrow.width) && touch.pageY > (ly + titlebar_height) && touch.pageY < (ly + titlebar_height + left_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " left_arrow " + left_arrow.x + ", " + left_arrow.y + ", " + left_arrow.r + " bar height " + titlebar_height);
-                            d = "left";
-                        }
-                        else if (event.type == "touchstart" && touch.pageX > rx && touch.pageX < (rx + right_arrow.width) && touch.pageY > (ry + titlebar_height) && touch.pageY < (ry + titlebar_height + right_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " right_arrow " + right_arrow.x + ", " + right_arrow.y + ", " + right_arrow.r + " bar height " + titlebar_height);
-                            d = "right";
-                        }
-                    }
-                }
-            }
-        }
         
         function init()
         {
@@ -202,20 +146,11 @@ App.controller('snake', function($page) {
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, w, h);
 
-            ctx.fillStyle = "#360a57";
-            ctx.fillRect(0, h, w, h*2);
-
             ctx.strokeStyle = "black";
             ctx.strokeRect(0, 0, w, h);
 
             ctx.fillStyle = "red";
             ctx.fillRect(0, 0, w, 2);
-
-            ctx.drawImage(controller, cx, cy, w, h);
-            ctx.drawImage(up_arrow, ux, uy);
-            ctx.drawImage(down_arrow, dx, dy);
-            ctx.drawImage(right_arrow,rx, ry);
-            ctx.drawImage(left_arrow, lx, ly);
             
             //The movement of the snake: pop out the tail cell and place it infront of the head cell
             var nx = snake_array[0].x;

@@ -60,6 +60,6 @@
   display: none;
 }
 
-#asteroids-game-button, #pacman-game-button, #pong-game-button, #snake-game-button, #space-invaders-game-button, #arkanoid-game-button {
+#pong-game-button, #snake-game-button, #space-invaders-game-button, #arkanoid-game-button {
    height: 200px;
 }​

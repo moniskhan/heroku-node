@@ -74,7 +74,6 @@ App.controller('space-invaders', function($page) {
         };
 
         Starfield.prototype.draw = function() {
-
             //  Get the drawing context.
             var ctx = this.canvas.getContext("2d");
 
@@ -140,34 +139,11 @@ App.controller('space-invaders', function($page) {
             this.pressedKeys = {};
             this.gameCanvas =  null;
 
-            this.controller = new Image();
-            this.controller.src = "../images/controller.png";
-            this.cx = 0; //W/2 - controller.width/2;
-            this.cy = H;
-
-            this.up_arrow = new Image();
-            this.up_arrow.src = "../images/up_green.png";
-            this.ux = W/2 - this.up_arrow.width/2;
-            this.uy = 10*(H/9);
-            this.down_arrow = new Image();
-            this.down_arrow.src = "../images/down_green.png";
-            this.dx = W/2 - this.down_arrow.width/2;
-            this.dy = 9*(H/6);
-            this.left_arrow = new Image();
-            this.left_arrow.src = "../images/left_green.png";
-            this.lx = W/4 - this.left_arrow.width/2;
-            this.ly = 9*(H/7);
-            this.right_arrow = new Image();
-            this.right_arrow.src = "../images/right_green.png";
-            this.rx = 3*W/4 - this.right_arrow.width/2;
-            this.ry = 9*(H/7);
-            this.fire_button = new Image();
-            this.fire_button.src = "../images/fire_red.png";
-            this.fx = W/2 - this.fire_button.width/2;
-            this.fy = 9*(H/7);
-
             this.invader_img = new Image();
             this.invader_img.src = "../images/spaceInvaderVillain.png";
+
+            this.ship = new Image();
+            this.ship.src = "../images/ship.png";
         }
 
         //  Initialis the Game with a canvas.
@@ -309,17 +285,6 @@ App.controller('space-invaders', function($page) {
             //  Clear the background.
             ctx.clearRect(0, 0, game.width, game.height);
 
-            ctx.fillStyle = "#360a57";
-            ctx.fillRect(0, H, W, H*2);
-
-            ctx.drawImage(game.controller, game.cx, game.cy, W, H);
-            // Draw directional arrows
-            ctx.drawImage(game.up_arrow, game.ux, game.uy);
-            ctx.drawImage(game.down_arrow, game.dx, game.dy);
-            ctx.drawImage(game.right_arrow, game.rx, game.ry);
-            ctx.drawImage(game.left_arrow, game.lx, game.ly);
-            ctx.drawImage(game.fire_button, game.fx, game.fy);
-
             ctx.font="30px Arial";
             ctx.fillStyle = '#ffffff';
             ctx.textBaseline="center"; 
@@ -342,17 +307,6 @@ App.controller('space-invaders', function($page) {
 
             //  Clear the background.
             ctx.clearRect(0, 0, game.width, game.height);
-
-            ctx.fillStyle = "#360a57";
-            ctx.fillRect(0, H, W, H*2);
-
-            ctx.drawImage(game.controller, game.cx, game.cy, W, H);
-            // Draw directional arrows
-            ctx.drawImage(game.up_arrow, game.ux, game.uy);
-            ctx.drawImage(game.down_arrow, game.dx, game.dy);
-            ctx.drawImage(game.right_arrow, game.rx, game.ry);
-            ctx.drawImage(game.left_arrow, game.lx, game.ly);
-            ctx.drawImage(game.fire_button, game.fx, game.fy);
 
             ctx.font="30px Arial";
             ctx.fillStyle = '#ffffff';
@@ -598,21 +552,11 @@ App.controller('space-invaders', function($page) {
 
             //  Clear the background.
             ctx.clearRect(0, 0, game.width, game.height);
-
-            ctx.fillStyle = "#360a57";
-            ctx.fillRect(0, H, W, H*2);
-
-            ctx.drawImage(game.controller, game.cx, game.cy, W, H);
-            // Draw directional arrows
-            ctx.drawImage(game.up_arrow, game.ux, game.uy);
-            ctx.drawImage(game.down_arrow, game.dx, game.dy);
-            ctx.drawImage(game.right_arrow, game.rx, game.ry);
-            ctx.drawImage(game.left_arrow, game.lx, game.ly);
-            ctx.drawImage(game.fire_button, game.fx, game.fy);
             
             //  Draw ship.
-            ctx.fillStyle = '#999999';
-            ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
+            //ctx.fillStyle = '#999999';
+            //ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
+            ctx.drawImage(game.ship, this.ship.x - this.ship.width/2, this.ship.y - this.ship.height/2, this.ship.width, this.ship.height);
 
             //  Draw invaders.
             ctx.fillStyle = '#006600';
@@ -672,7 +616,6 @@ App.controller('space-invaders', function($page) {
 
         //    The Level Intro state shows a 'Level X' message and
         //    a countdown for the level.
-
         function LevelIntroState(level) {
             this.level = level;
             this.countdownMessage = "3";
@@ -704,17 +647,6 @@ App.controller('space-invaders', function($page) {
             //  Clear the background.
             ctx.clearRect(0, 0, game.width, game.height);
 
-            ctx.fillStyle = "#360a57";
-            ctx.fillRect(0, H, W, H*2);
-
-            ctx.drawImage(game.controller, game.cx, game.cy, W, H);
-            // Draw directional arrows
-            ctx.drawImage(game.up_arrow, game.ux, game.uy);
-            ctx.drawImage(game.down_arrow, game.dx, game.dy);
-            ctx.drawImage(game.right_arrow, game.rx, game.ry);
-            ctx.drawImage(game.left_arrow, game.lx, game.ly);
-            ctx.drawImage(game.fire_button, game.fx, game.fy);
-
             ctx.font="36px Arial";
             ctx.fillStyle = '#ffffff';
             ctx.textBaseline="middle";
@@ -729,7 +661,6 @@ App.controller('space-invaders', function($page) {
         //  Ship
 
         //  The ship has a position and that's about it.
-
         function Ship(x, y) {
             this.x = x;
             this.y = y;
@@ -749,7 +680,6 @@ App.controller('space-invaders', function($page) {
         //    Rocket
 
         //    Fired by the ship, they've got a position, velocity and state.
-
         function Rocket(x, y, velocity) {
             this.x = x;
             this.y = y;
@@ -760,7 +690,6 @@ App.controller('space-invaders', function($page) {
         //    Bomb
 
         //    Dropped by invaders, they've got position, velocity.
-
         function Bomb(x, y, velocity) {
             this.x = x;
             this.y = y;
@@ -771,7 +700,6 @@ App.controller('space-invaders', function($page) {
         //    Invader 
 
         //   Invader's have position, type, rank/file and that's about it. 
-
         function Invader(x, y, rank, file, type) {
             this.x = x;
             this.y = y;
@@ -789,7 +717,6 @@ App.controller('space-invaders', function($page) {
         //    When a game is in the state, the update and draw procs are
         //    called, with a dt value (dt is delta time, i.e. the number)
         //    of seconds to update or draw).
-
         function GameState(updateProc, drawProc, enter, leave) {
             this.updateProc = updateProc;
             this.drawProc = drawProc;
@@ -803,10 +730,10 @@ App.controller('space-invaders', function($page) {
         //  Setup the canvas.
         var canvas = $page.querySelector(".canvas");
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 10*titlebar_height/9;
+        canvas.height = 3*window.innerHeight/4 - 10*titlebar_height/9;
 
         var W = canvas.width; // Window's width
-        var H = canvas.height/2; // Window's height
+        var H = canvas.height; // Window's height
 
         var container = $page.querySelector("#starfield");
         var starfield = new Starfield();
@@ -820,6 +747,32 @@ App.controller('space-invaders', function($page) {
         //  Initialise it with the game canvas.
         game.initialise(canvas);
 
+        var left = $page.querySelector("#space-invaders-left");
+        left.addEventListener('click', function() {
+            game.direction = "left";
+        });
+        var right = $page.querySelector("#space-invaders-right");
+        right.addEventListener('click', function() {
+            game.direction = "right";
+        });
+        var fire = $page.querySelector("#space-invaders-fire");
+        fire.addEventListener('click', function() {
+            game.currentState().fireRocket();
+        });
+
+        window.onkeydown = function(e) {
+            var key = e.keyCode ? e.keyCode : e.which;
+            
+            if (key == 37) {
+                game.direction = "left";
+            }else if (key == 39) {
+                game.direction = "right";
+            }
+            else if (key == 32) {
+                game.currentState().fireRocket();
+            }
+        }
+
         game.gameCanvas.addEventListener("touchstart", function touchHandler(event) {
             if (event.targetTouches.length >= 1) { //one finger touche
                 var touch = event.targetTouches[event.targetTouches.length -1];
@@ -831,35 +784,13 @@ App.controller('space-invaders', function($page) {
                         game.lives = 3;
                         game.moveToState(new LevelIntroState(game.level), "LevelIntroState");
                         //alert("touch " + touch.pageX + ", " + touch.pageY + " " + this.currentState());
-                    } 
-                    else if (game.currentStateName() == "PlayState") {
-                        if(touch.pageX > game.dx && touch.pageX < (game.dx + game.down_arrow.width) && touch.pageY > (game.dy + titlebar_height) && touch.pageY < (game.dy + titlebar_height + game.down_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " down_arrow " + down_arrow.x + ", " + down_arrow.y + ", " + down_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "down";
-                        }
-                        else if(touch.pageX > game.ux && touch.pageX < (game.ux + game.up_arrow.width) && touch.pageY > (game.uy + titlebar_height) && touch.pageY < (game.uy + titlebar_height + game.up_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " up_arrow " + up_arrow.x + ", " + up_arrow.y + ", " + up_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "up";
-                        }
-                        else if (touch.pageX > game.lx && touch.pageX < (game.lx + game.left_arrow.width) && touch.pageY > (game.ly + titlebar_height) && touch.pageY < (game.ly + titlebar_height + game.left_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " left_arrow " + left_arrow.x + ", " + left_arrow.y + ", " + left_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "left";
-                        }
-                        else if (touch.pageX > game.rx && touch.pageX < (game.rx + game.right_arrow.width) && touch.pageY > (game.ry + titlebar_height) && touch.pageY < (game.ry + titlebar_height + game.right_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " right_arrow " + right_arrow.x + ", " + right_arrow.y + ", " + right_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "right";
-                        }
-                        else if (touch.pageX > game.fx && touch.pageX < (game.fx + game.fire_button.width) && touch.pageY > (game.fy + titlebar_height) && touch.pageY < (game.fy + titlebar_height + game.fire_button.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " right_arrow " + right_arrow.x + ", " + right_arrow.y + ", " + right_arrow.r + " bar height " + titlebar_height);
-                            game.currentState().fireRocket();
-                        }
                     }
                 }
             }
         }, false);
 
 
-        game.gameCanvas.addEventListener("touchmove", function moveHandler(event) {
+        game.gameCanvas.addEventListener("touchmove", function(event) {
             if (event.targetTouches.length >= 1) { //one finger touche
                 var touch = event.targetTouches[event.targetTouches.length -1];
 
@@ -869,31 +800,17 @@ App.controller('space-invaders', function($page) {
                         game.score = 0;
                         game.lives = 3;
                         game.moveToState(new LevelIntroState(game.level), "LevelIntroState");
-                        //alert("touch " + touch.pageX + ", " + touch.pageY + " " + this.currentState());
-                    } 
-                    else if (game.currentStateName() == "PlayState") {
-                        if(touch.pageX > game.dx && touch.pageX < (game.dx + game.down_arrow.width) && touch.pageY > (game.dy + titlebar_height) && touch.pageY < (game.dy + titlebar_height + game.down_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " down_arrow " + down_arrow.x + ", " + down_arrow.y + ", " + down_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "down";
-                        }
-                        else if(touch.pageX > game.ux && touch.pageX < (game.ux + game.up_arrow.width) && touch.pageY > (game.uy + titlebar_height) && touch.pageY < (game.uy + titlebar_height + game.up_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " up_arrow " + up_arrow.x + ", " + up_arrow.y + ", " + up_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "up";
-                        }
-                        else if (touch.pageX > game.lx && touch.pageX < (game.lx + game.left_arrow.width) && touch.pageY > (game.ly + titlebar_height) && touch.pageY < (game.ly + titlebar_height + game.left_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " left_arrow " + left_arrow.x + ", " + left_arrow.y + ", " + left_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "left";
-                        }
-                        else if (touch.pageX > game.rx && touch.pageX < (game.rx + game.right_arrow.width) && touch.pageY > (game.ry + titlebar_height) && touch.pageY < (game.ry + titlebar_height + game.right_arrow.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " right_arrow " + right_arrow.x + ", " + right_arrow.y + ", " + right_arrow.r + " bar height " + titlebar_height);
-                            game.direction = "right";
-                        }
-                        else if (touch.pageX > game.fx && touch.pageX < (game.fx + game.fire_button.width) && touch.pageY > (game.fy + titlebar_height) && touch.pageY < (game.fy + titlebar_height + game.fire_button.height)){
-                            //alert("touch " + touch.pageX + ", " + touch.pageY + " right_arrow " + right_arrow.x + ", " + right_arrow.y + ", " + right_arrow.r + " bar height " + titlebar_height);
-                            game.currentState().fireRocket();
-                        }
                     }
                 }
+            }
+        }, false);
+
+        game.gameCanvas.addEventListener("click", function moveHandler(event) {
+            if ((game.currentStateName() == "WelcomeState") || (game.currentStateName() == "GameOverState")) {
+                game.level = 1;
+                game.score = 0;
+                game.lives = 3;
+                game.moveToState(new LevelIntroState(game.level), "LevelIntroState");
             }
         }, false);
          

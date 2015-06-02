@@ -1,5 +1,5 @@
 {
-    "name": "kp-arcade",
+    "name": "classic-arcade",
     "version": "0.0.1",
     "dependencies": {
         "node-simple-router": "0.9.3-1",
@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/lunaleaps/kp-arcade.git"
+        "url": "https://github.com/moniskhan/heroku-node"
     },
     "scripts": {
         "start": "node app.js"

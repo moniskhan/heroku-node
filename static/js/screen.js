@@ -1,5 +1,3 @@
-var paid;
-
 $(document).ready(function() {
 	var ul;
 	var liItems;
@@ -8,11 +6,8 @@ $(document).ready(function() {
 	var prev, next;
 	var currentPostion = 0;
 	var currentImage = 0;
-  paid = false;
-
 
   function init(){
-    paid = false;
     ul = document.getElementById('image_slider');
     liItems = ul.children;
     imageNumber = liItems.length;
@@ -106,11 +101,11 @@ $(document).ready(function() {
 	}
 	window.onload = init;
 
-	function kikPoints(){
-		var id = kik.utils.random.uuid();
-    var pointsValue = 25;
-    var sku = 'com.herokuapp.kp-aracde.play';
-    var verify;
+	function initiate(){
+		//var id = kik.utils.random.uuid();
+    //var pointsValue = 25;
+    //var sku = 'com.herokuapp.kp-aracde.play';
+    //var verify;
 		/*points.redeem(id, pointsValue, sku, function spend(transaction, verify){
       if (transaction.status == "PROCESSED"){
         switch (currentImage) {
@@ -137,21 +132,15 @@ $(document).ready(function() {
 		});*/
     switch (currentImage) {
         case 0:
-            App.load('pacman');
-            break;
-        case 1:
-              App.load('asteroids');
-            break;
-        case 2:
               App.load('pong');
             break;
-        case 3:
+        case 1:
               App.load('snake');
             break;
-        case 4:
+        case 2:
               App.load('space-invaders');
             break;
-        case 5:
+        case 3:
               App.load('arkanoid');
             break;
     }
@@ -159,9 +148,7 @@ $(document).ready(function() {
 
 	var start_button = document.getElementById("play-button");
 	$(start_button).on('vmousedown', function(e){
-    paid = true;
-    kikPoints();
-    paid = false;
+    initiate();
 	});
 	
 });
